@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getRecommendations, getCareerPaths, getResources } from './AI/recommendationService';
-import './Styles/phase.css';
+import { getRecommendations } from '../ai/recommendationService';
+import '../styles/phase.css';
 
 export default function Start() {
   const [recs, setRecs] = useState([]);

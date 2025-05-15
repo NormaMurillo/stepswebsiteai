@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from './Components/Layout';
-import Start from './Phases/Start';
-import Transform from './Phases/Transform';
-import Excel from './Phases/Excel';
-import Professionalize from './Phases/Professionalize';
-import Success from './Phases/Success';
+import Layout from '../components/Layout';
+import Start from '../phases/Start';
+import Transform from '../phases/Transform';
+import Excel from '../phases/Excel';
+import Professionalize from '../phases/Professionalize';
+import Success from '../phases/Success';
 
 export default function App() {
   return (
