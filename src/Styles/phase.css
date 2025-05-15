@@ -1,42 +1,22 @@
-/* src/styles/phase.css */
 .phase {
-    background: #fff;
+    background: white;
     border-radius: 8px;
-    padding: 32px; /* var(--space-lg) */ 
-    margin-bottom: 32px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .phase h1 {
+    color: #003366;
   }
   
   .phase h2 {
-    font-family: 'Poppins', sans-serif;
-    margin-bottom: 16px;
-    color: #00c49f; /* var(--brand-green) */
+    color: #0055aa;
+    margin-top: 20px;
   }
   
-  .phase p {
-    margin-bottom: 16px;
-  }
-  
-  .phase-section {
-    margin-bottom: 24px;
-  }
-  
-  .phase-section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
-  
-  .phase-section ul {
-    list-style: disc;
+  .phase ul {
+    list-style-type: square;
     padding-left: 20px;
-  }
-  
-  .phase button {
-    background: #0052cc; /* var(--brand-blue) */
-    color: #fff;
-    border: none;
-    padding: 8px 16px; /* var(--space-sm/var(--space-md)) */
-    cursor: pointer;
-    border-radius: 4px;
   }
   

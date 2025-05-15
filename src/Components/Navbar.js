@@ -1,17 +1,15 @@
 import React from 'react';
-import '.Styles/navbar.css';
+import { Link } from 'react-router-dom';
+import '../styles/navbar.css';
 
-export default function Navbar() {
-  return (
-    <nav className="navbar">
-      <div className="navbar--brand">STEPS</div>
-      <ul className="navbar--links">
-        {['Start','Transform','Excel','Professionalize','Success'].map(phase => (
-          <li key={phase}>
-            <a href={`#${phase.toLowerCase()}`}>{phase}</a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-}
+const Navbar = () => (
+  <nav className="navbar">
+    <Link to="/">Start</Link>
+    <Link to="/transform">Transform</Link>
+    <Link to="/excel">Excel</Link>
+    <Link to="/professionalize">Professionalize</Link>
+    <Link to="/success">Success</Link>
+  </nav>
+);
+
+export default Navbar;

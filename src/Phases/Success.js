@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { getRecommendations } from '../ai/recommendationService';
+import React from 'react';
 import '../styles/phase.css';
 
-export default function Success() {
-  const phase = 'success';
-  const [recs, setRecs] = useState([]);
-  const [paths, setPaths] = useState([]);
-  const [resources, setResources] = useState([]);
+const Success = () => {
+  // Inlined data for the Success phase
+  const careerPaths = [
+    'Technical Lead',
+    'CTO'
+  ];
 
-  useEffect(() => {
-    getRecommendations(phase).then(setRecs);
-    getCareerPaths(phase).then(setPaths);
-    getResources(phase).then(setResources);
-  }, []);
+  const resources = [
+    'Leadership Development Program',
+    'Innovation Management Workshop'
+  ];
 
   return (
-    <section id="success" className="phase">
-      <h2>Success</h2>
-      <p>Liderazgo y fortalecimiento profesional continuo.</p>
+    <section className="phase">
+      <h1>Success Phase</h1>
+      
       <div className="phase-section">
-        <h3>Orientación por IA</h3>
-        <ul>{recs.map((r,i) => <li key={i}>{r}</li>)}</ul>
+        <h2>Career Paths</h2>
+        <ul>
+          {careerPaths.map((path, i) => (
+            <li key={i}>{path}</li>
+          ))}
+        </ul>
       </div>
+
       <div className="phase-section">
-        <h3>Rutas Profesionales</h3>
-        <ul>{paths.map((p,i) => <li key={i}>{p}</li>)}</ul>
-      </div>
-      <div className="phase-section">
-        <h3>Recursos Recomendados</h3>
-        <ul>{resources.map((r,i) => <li key={i}>{r}</li>)}</ul>
+        <h2>Resources</h2>
+        <ul>
+          {resources.map((res, i) => (
+            <li key={i}>{res}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
-}
+};
+
+export default Success;

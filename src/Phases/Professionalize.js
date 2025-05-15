@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { getRecommendations } from '../ai/recommendationService';
+import React from 'react';
 import '../styles/phase.css';
 
-export default function Professionalize() {
-  const phase = 'professionalize';
-  const [recs, setRecs] = useState([]);
-  const [paths, setPaths] = useState([]);
-  const [resources, setResources] = useState([]);
+const Professionalize = () => {
+  // Inlined data for the Professionalize phase
+  const careerPaths = [
+    'Machine Learning Engineer',
+    'Security Consultant'
+  ];
 
-  useEffect(() => {
-    getRecommendations(phase).then(setRecs);
-    getCareerPaths(phase).then(setPaths);
-    getResources(phase).then(setResources);
-  }, []);
+  const resources = [
+    'Advanced AI/ML Nanodegree',
+    'Cybersecurity Certification Path'
+  ];
 
   return (
-    <section id="professionalize" className="phase">
-      <h2>Professionalize</h2>
-      <p>Especialización y dominio de áreas específicas.</p>
+    <section className="phase">
+      <h1>Professionalize Phase</h1>
+      
       <div className="phase-section">
-        <h3>Orientación por IA</h3>
-        <ul>{recs.map((r,i) => <li key={i}>{r}</li>)}</ul>
+        <h2>Career Paths</h2>
+        <ul>
+          {careerPaths.map((path, i) => (
+            <li key={i}>{path}</li>
+          ))}
+        </ul>
       </div>
+
       <div className="phase-section">
-        <h3>Rutas Profesionales</h3>
-        <ul>{paths.map((p,i) => <li key={i}>{p}</li>)}</ul>
-      </div>
-      <div className="phase-section">
-        <h3>Recursos Recomendados</h3>
-        <ul>{resources.map((r,i) => <li key={i}>{r}</li>)}</ul>
+        <h2>Resources</h2>
+        <ul>
+          {resources.map((res, i) => (
+            <li key={i}>{res}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
-}
+};
+
+export default Professionalize;
