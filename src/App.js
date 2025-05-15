@@ -1,22 +1,19 @@
-// src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import './App.css';
-import CareerGoals from './Views/CareerGoals';
-import AcademicProgress from './Views/AcademicProgress';
+import Layout from '../Components/Layout';
+import Start from '../Phases/Start';
+import Transform from '../Phases/Transform';
+import Excel from '../Phases/Excel';
+import Professionalize from '../Phases/Professionalize';
+import Success from '../Phases/Success';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to="/career-goals" replace />} />
-          <Route path="/career-goals" element={<CareerGoals />} />
-          <Route path="/academic-progress" element={<AcademicProgress />} />
-        </Routes>
-      </Router>
-    </div>
+    <Layout>
+      <Start />           {/* Fase S: Start :contentReference[oaicite:2]{index=2} */}
+      <Transform />       {/* Fase T: Transform */}
+      <Excel />           {/* Fase E: Excel */}
+      <Professionalize /> {/* Fase P: Professionalize */}
+      <Success />         {/* Fase S: Success */}
+    </Layout>
   );
 }
-
-export default App;

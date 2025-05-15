@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--brand-blue);
+    padding: var(--space-md);
+  }
+  
+  .navbar--brand {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--text-light);
+  }
+  
+  .navbar--links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+  }
+  
+  .navbar--links a {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+  
