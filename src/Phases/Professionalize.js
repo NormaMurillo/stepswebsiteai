@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getRecommendations, getCareerPaths, getResources } from '../ai/recommendationService';
-import '../styles/phase.css';
+import { getRecommendations, getCareerPaths, getResources } from './ai/recommendationService';
+import './styles/phase.css';
 
 export default function Professionalize() {
   const phase = 'professionalize';

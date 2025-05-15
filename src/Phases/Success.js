@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getRecommendations, getCareerPaths, getResources } from '../AI/recommendationService';
-import '../Styles/phase.css';
+import { getRecommendations, getCareerPaths, getResources } from './AI/recommendationService';
+import './Styles/phase.css';
 
 export default function Success() {
   const phase = 'success';
