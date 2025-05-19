@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { fetchAndAnalyzeProfiles } from "../services/profileService";
 import "../styles/phase.css";
 
+
 export default function ProfileRecommendations() {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,10 +11,11 @@ export default function ProfileRecommendations() {
   useEffect(() => {
     (async () => {
       try {
+        console.log("📡 llamando a fetchAndAnalyzeProfiles()");
         const results = await fetchAndAnalyzeProfiles();
         setProfiles(results);
       } catch (err) {
-        console.error("Error fetching profiles:", err);
+        console.error("❌ error al cargar perfiles:", err);
       } finally {
         setLoading(false);
       }
@@ -37,7 +39,7 @@ export default function ProfileRecommendations() {
         <p>No hay perfiles disponibles.</p>
       ) : (
         profiles.map((p, idx) => (
-          <div key={idx} style={{ marginBottom: 24 }}>
+          <div key={idx} className="profile-card">
             <h2>
               {p.nombre} ({p.yearGraduated})
             </h2>

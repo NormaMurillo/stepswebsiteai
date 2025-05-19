@@ -1,30 +1,34 @@
+// src/services/profileService.js
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
-// Convierte un string CSV en array, descartando "NA" o valores vacíos
+/**
+ * Convierte un string CSV en array, descartando "NA" o vacíos.
+ */
 function parseCsvField(field) {
   if (typeof field !== "string") return [];
   return field
     .split(",")
-    .map(s => s.trim())
-    .filter(s => s && s.toUpperCase() !== "NA");
+    .map((s) => s.trim())
+    .filter((s) => s && s.toUpperCase() !== "NA");
 }
 
+/**
+ * Reglas básicas para generar sugerencias de rutas.
+ */
 function analyzeOneProfile(data) {
   const suggestions = [];
 
-  // Normaliza los campos a array
   const certs = parseCsvField(data.Certifications);
   const projects = parseCsvField(data.Projects);
   const clubs = parseCsvField(data["Student_Groups/Clubs"]);
-
   const studyArea = (data["Study Area"] || "").toLowerCase();
   const career = (data.Career || "").toLowerCase();
 
-  // Sugerencia 1: Cloud Engineer
+  // 1) Cloud Engineer
   if (
-    certs.some(c => c.toLowerCase().includes("azure")) ||
-    certs.some(c => c.toLowerCase().includes("cloud")) ||
+    certs.some((c) => c.toLowerCase().includes("azure")) ||
+    certs.some((c) => c.toLowerCase().includes("cloud")) ||
     studyArea.includes("cloud")
   ) {
     suggestions.push({
@@ -34,10 +38,10 @@ function analyzeOneProfile(data) {
     });
   }
 
-  // Sugerencia 2: Data Scientist
+  // 2) Data Scientist
   if (
-    certs.some(c => c.toLowerCase().includes("data")) ||
-    projects.some(p => p.toLowerCase().includes("datathon")) ||
+    certs.some((c) => c.toLowerCase().includes("data")) ||
+    projects.some((p) => p.toLowerCase().includes("datathon")) ||
     studyArea.includes("data")
   ) {
     suggestions.push({
@@ -47,9 +51,9 @@ function analyzeOneProfile(data) {
     });
   }
 
-  // Sugerencia 3: Project Manager
+  // 3) Project Manager
   if (
-    clubs.some(club => club.toLowerCase().includes("presidencia")) ||
+    clubs.some((club) => club.toLowerCase().includes("presidencia")) ||
     career.includes("transformación digital") ||
     career.includes("itd")
   ) {
@@ -60,7 +64,7 @@ function analyzeOneProfile(data) {
     });
   }
 
-  // Si no hay sugerencias, devuelve un placeholder
+  // Si no hay coincidencias, sugerencia genérica
   if (suggestions.length === 0) {
     suggestions.push({
       title: "Explora más opciones",
@@ -72,17 +76,22 @@ function analyzeOneProfile(data) {
   return suggestions;
 }
 
+/**
+ * Lee todos los perfiles de la colección `users`,
+ * les aplica `analyzeOneProfile` y devuelve un array de resultados.
+ */
 export async function fetchAndAnalyzeProfiles() {
   const snap = await getDocs(collection(db, "users"));
-  const results = snap.docs.map(doc => {
+  console.log(`🔍 perfiles encontrados: ${snap.size}`);
+  const results = snap.docs.map((doc) => {
     const data = doc.data();
     return {
       nombre: data.userName || data.Nombre || "Usuario",
       yearGraduated: data.yearGraduated || data.anioEgreso || "N/A",
       career: data.Career || "N/A",
-      // sugerencias IA
       suggestions: analyzeOneProfile(data),
     };
   });
+  console.log("🔍 resultados procesados:", results);
   return results;
 }
