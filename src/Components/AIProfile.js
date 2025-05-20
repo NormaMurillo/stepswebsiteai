@@ -33,11 +33,11 @@ const IAProfile = ({ userId }) => {
     try {
       const generateProfileSuggestions = httpsCallable(functions, "generateProfileSuggestions");
       const result = await generateProfileSuggestions({
-        nombre: profileData.nombre,
-        carrera: profileData.carrera,
-        cursos: profileData.cursos || [],
-        grupos: profileData.grupos || "",
-        proyectos: profileData.proyectos || [],
+        nombre: profileData.userName || "Usuario",
+        carrera: profileData.Career || "",
+        cursos: profileData.Certifications || [],
+        grupos: profileData["Student_Groups/Clubs"] || "",
+        proyectos: profileData.Projects || [],
       });
 
       setSuggestions(result.data.suggestions);
@@ -49,30 +49,25 @@ const IAProfile = ({ userId }) => {
     }
   };
 
+  // 🔹 3. Renderizado
   return (
-    <div style={{ padding: "1rem" }}>
+    <div>
       <h2>Perfil del Usuario</h2>
-      {profileData ? (
+      {!profileData ? (
+        <p>Cargando perfil...</p>
+      ) : (
         <>
-          <p><strong>Nombre:</strong> {profileData.nombre}</p>
-          <p><strong>Carrera:</strong> {profileData.carrera}</p>
-          <p><strong>Cursos:</strong> {(profileData.cursos || []).join(", ")}</p>
-          <p><strong>Grupos:</strong> {profileData.grupos}</p>
-          <p><strong>Proyectos:</strong> {(profileData.proyectos || []).join(", ")}</p>
-
+          <pre>{JSON.stringify(profileData, null, 2)}</pre>
           <button onClick={generateSuggestions} disabled={loading}>
-            {loading ? "Generando..." : "Obtener recomendaciones de IA"}
+            {loading ? "Generando..." : "Obtener recomendaciones con IA"}
           </button>
-
           {suggestions && (
-            <div style={{ marginTop: "1rem" }}>
-              <h3>Recomendaciones de IA</h3>
-              <pre>{suggestions}</pre>
+            <div>
+              <h3>Recomendaciones:</h3>
+              <p>{suggestions}</p>
             </div>
           )}
         </>
-      ) : (
-        <p>Cargando perfil...</p>
       )}
     </div>
   );

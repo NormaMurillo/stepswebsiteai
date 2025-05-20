@@ -9,7 +9,7 @@ const Navbar = () => (
     <Link to="/excel">Excel</Link>
     <Link to="/professionalize">Professionalize</Link>
     <Link to="/success">Success</Link>
-    <Link to="/perfilamiento con ai">Perfilamiento Inteligente con Firestore</Link>
+    <Link to="/Perfilamiento Inteligente con Firestore">Perfilamiento Inteligente con Firestore</Link>
     <Link to="/AIProfile">Perfil con IA</Link>
   </nav>
 );

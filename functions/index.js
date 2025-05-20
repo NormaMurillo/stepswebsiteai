@@ -18,48 +18,47 @@
 //   response.send("Hello from Firebase!");
 // });
 
-const {onCall} = require("firebase-functions/v2/https");
 const functions = require("firebase-functions");
-const {Configuration, OpenAIApi} = require("openai");
+const { Configuration, OpenAIApi } = require("openai");
 
-// ✅ Usamos functions.config() en lugar de process.env
+// Configura tu clave de OpenAI
 const configuration = new Configuration({
-  apiKey: functions.config().openai.key,
+  apiKey: functions.config().openai.key, // o directamente: process.env.OPENAI_API_KEY
 });
-
 const openai = new OpenAIApi(configuration);
 
-exports.generateProfileSuggestions = onCall(async (request) => {
-  const {nombre, carrera, cursos, grupos, proyectos} = request.data;
+// Función de perfilamiento con IA
+exports.generateProfileSuggestions = functions.https.onCall(async (data, context) => {
+  const { nombre, carrera, cursos, grupos, proyectos } = data;
+
+  if (!nombre || !carrera) {
+    throw new functions.https.HttpsError("invalid-argument", "Faltan campos obligatorios.");
+  }
 
   const prompt = `
-Eres un asistente de orientación profesional. Basado en el siguiente perfil:
+Actúa como un orientador profesional. Analiza el siguiente perfil de un estudiante y sugiere 3 recomendaciones personalizadas para fortalecer su perfil profesional:
 
-- Nombre: ${nombre}
-- Carrera: ${carrera}
-- Cursos/certificaciones: ${cursos.join(", ")}
-- Grupos estudiantiles: ${grupos}
-- Proyectos: ${proyectos.join(", ")}
+Nombre: ${nombre}
+Carrera: ${carrera}
+Cursos / Certificaciones: ${cursos}
+Grupos / Clubes: ${grupos}
+Proyectos: ${proyectos}
 
-Sugiere tres rutas profesionales posibles y una recomendación adicional 
-personalizada.
+Redacta las recomendaciones de forma clara y motivadora.
 `;
 
   try {
-    const completion = await openai.createChatCompletion({
+    const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
-      messages: [{role: "user", content: prompt}],
+      messages: [{ role: "user", content: prompt }],
+      max_tokens: 300,
+      temperature: 0.7,
     });
 
-    return {
-      suggestions: completion.data.choices[0].message.content,
-    };
+    const suggestions = response.data.choices[0].message.content;
+    return { suggestions };
   } catch (error) {
-    console.error("Error calling OpenAI:", error.message);
-    throw new functions.https.HttpsError(
-        "internal",
-        "OpenAI call failed, try again later.",
-    );
+    console.error("Error con OpenAI:", error);
+    throw new functions.https.HttpsError("internal", "Error al generar sugerencias.");
   }
 });
-

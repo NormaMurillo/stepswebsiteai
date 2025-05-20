@@ -20,18 +20,9 @@ function App() {
           <Route path="/excel" element={<Excel />} />
           <Route path="/professionalize" element={<Professionalize />} />
           <Route path="/success" element={<Success />} />
-          <Route path="/perfilamiento con ai" element={<ProfileRecommendations />} />
-          <Route path="/ia" element={<AIProfile />} />
-          <Route path="/AIProfile" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera/:cursos" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera/:cursos/:grupos" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera/:cursos/:grupos/:proyectos" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera/:cursos/:grupos/:proyectos/:suggestions" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera/:cursos/:grupos/:proyectos/:suggestions/:loading" element={<AIProfile />} />
-          <Route path="/AIProfile/:userId/:nombre/:carrera/:cursos/:grupos/:proyectos/:suggestions/:loading/:error" element={<AIProfile />} />
+          <Route path="/Perfilamiento Inteligente con Firestore" element={<ProfileRecommendations />} />
+          <Route path="/AIProfile" element={<AIProfile userId ="STEPS_User1" />} />
+          
         </Routes>
       </Layout>
     </Router>
