@@ -320,3 +320,4 @@ Dev App Server is now running.
 └─────────────────────────┴───────────────┴─────────────────────┘
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[debug] [2025-05-20T06:04:22.109Z] Received signal SIGHUP 1
