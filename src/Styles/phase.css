@@ -1,26 +1,69 @@
 /* src/styles/phase.css */
+
 .phase {
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 16px auto;
-  max-width: 600px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 24px auto;
+  max-width: 720px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #1f2937;
+  transition: all 0.3s ease-in-out;
+}
+
+.phase:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 }
 
 .phase h1 {
-  color: #003366;
-  margin-bottom: 16px;
+  color: #1e3a8a;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  border-left: 4px solid #3b82f6;
+  padding-left: 12px;
 }
 
-.phase h2,
+.phase h2 {
+  color: #2563eb;
+  font-size: 1.5rem;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
 .phase h3 {
-  color: #0055aa;
-  margin-top: 12px;
+  color: #3b82f6;
+  font-size: 1.25rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .phase ul {
   list-style-type: disc;
-  padding-left: 20px;
+  padding-left: 24px;
+  margin-bottom: 16px;
 }
-  
+
+.phase li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .phase {
+    padding: 20px;
+  }
+
+  .phase h1 {
+    font-size: 1.5rem;
+  }
+
+  .phase h2 {
+    font-size: 1.25rem;
+  }
+
+  .phase h3 {
+    font-size: 1.1rem;
+  }
+}
